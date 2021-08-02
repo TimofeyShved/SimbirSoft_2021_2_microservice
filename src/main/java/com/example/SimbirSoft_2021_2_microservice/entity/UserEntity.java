@@ -31,6 +31,9 @@ public class UserEntity { // ----------------------------------------------- н�
     @Column(name = "password")
     private String password;
 
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "userId")
+    private List<BalanceEntity> balanceEntities;
+
     public UserEntity(){ // конструктор
     }
 
@@ -94,4 +97,11 @@ public class UserEntity { // ----------------------------------------------- н�
         this.password = password;
     }
 
+    public List<BalanceEntity> getBalanceEntities() {
+        return balanceEntities;
+    }
+
+    public void setBalanceEntities(List<BalanceEntity> balanceEntities) {
+        this.balanceEntities = balanceEntities;
+    }
 }
