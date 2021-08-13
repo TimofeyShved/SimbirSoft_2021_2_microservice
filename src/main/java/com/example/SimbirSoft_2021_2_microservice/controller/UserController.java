@@ -2,6 +2,7 @@ package com.example.SimbirSoft_2021_2_microservice.controller;
 
 
 import com.example.SimbirSoft_2021_2_microservice.Dto.UserDto;
+import com.example.SimbirSoft_2021_2_microservice.model.UserModel;
 import com.example.SimbirSoft_2021_2_microservice.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
