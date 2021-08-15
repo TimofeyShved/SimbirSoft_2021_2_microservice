@@ -1,6 +1,7 @@
 package com.example.SimbirSoft_2021_2_microservice.service;
 
 import com.example.SimbirSoft_2021_2_microservice.Dto.UserDto;
+import com.example.SimbirSoft_2021_2_microservice.exception.UserExistsException;
 import com.example.SimbirSoft_2021_2_microservice.service.interfaceService.StandartServiceInterface;
 import com.example.SimbirSoft_2021_2_microservice.service.interfaceService.UserServiceInterface;
 import lombok.extern.slf4j.Slf4j;
