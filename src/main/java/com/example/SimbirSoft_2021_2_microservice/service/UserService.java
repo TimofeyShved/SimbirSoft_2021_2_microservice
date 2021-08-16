@@ -4,26 +4,11 @@ import com.example.SimbirSoft_2021_2_microservice.Dto.UserDto;
 import com.example.SimbirSoft_2021_2_microservice.entity.UserEntity;
 import com.example.SimbirSoft_2021_2_microservice.exception.UserExistsException;
 import com.example.SimbirSoft_2021_2_microservice.exception.UserNotFoundException;
+import com.example.SimbirSoft_2021_2_microservice.mappers.UserMapper;
 import com.example.SimbirSoft_2021_2_microservice.model.UserModel;
+import com.example.SimbirSoft_2021_2_microservice.repository.UserCrud;
 import com.example.SimbirSoft_2021_2_microservice.service.interfaceService.StandartServiceInterface;
 import com.example.SimbirSoft_2021_2_microservice.service.interfaceService.UserServiceInterface;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
-
-package com.example.SimbirSoft_2021.service;
-
-import com.example.SimbirSoft_2021.Dto.UserDto;
-import com.example.SimbirSoft_2021.entity.UserEntity;
-import com.example.SimbirSoft_2021.exception.*;
-import com.example.SimbirSoft_2021.mappers.UserMapper;
-import com.example.SimbirSoft_2021.model.UserModel;
-import com.example.SimbirSoft_2021.repository.UserCrud;
-import com.example.SimbirSoft_2021.service.interfaceService.StandartServiceInterface;
-import com.example.SimbirSoft_2021.service.interfaceService.UserServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
