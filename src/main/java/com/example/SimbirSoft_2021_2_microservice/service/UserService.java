@@ -49,12 +49,10 @@ public class UserService implements StandartServiceInterface<UserDto>, UserServi
     //private ProjectCrud projectCRUD;
 
     private final UserCrud userCrud; // создаём интерфейс для взаимодействия с бд
-    private final RoleService roleService;
 
     // 3 способ
-    public UserService(UserCrud userCrud, RoleService roleService) {
+    public UserService(UserCrud userCrud) {
         this.userCrud = userCrud;
-        this.roleService = roleService;
     }
 
     /**
@@ -139,18 +137,16 @@ public class UserService implements StandartServiceInterface<UserDto>, UserServi
      * @param id Это первый и единственный параметр метода deleteOne, который обозначает номер пользователя в бд.
      * @return Long Вернёт номер пользователя в бд.
      * @exception UserNotFoundException При ошибке если люди вообще не существуют.
-     * @exception RoleNotFoundException При ошибке если роли вообще не существуют.
      */
     @Transactional
     @Override
-    public Long deleteOne(Long id) throws UserNotFoundException, RoleNotFoundException {
+    public Long deleteOne(Long id) throws UserNotFoundException {
 
         //  проверка на то что человек вообще существуют
         if (userCrud.findByUserId(id)==null){
             throw new UserNotFoundException();
         }
 
-        roleService.deleteByUserId(id);
         userCrud.deleteById(id);
         return id;
     }
@@ -163,7 +159,6 @@ public class UserService implements StandartServiceInterface<UserDto>, UserServi
      * @param userDto Это второй параметр метода updateOne, который обозначает данные пользователя.
      * @return UserDto Вернёт пользователя.
      * @exception UserNotFoundException При ошибке если люди вообще не существуют.
-     * @exception RoleNotFoundException При ошибке если такая реализация уже существует.
      */
     @Transactional
     @Override
