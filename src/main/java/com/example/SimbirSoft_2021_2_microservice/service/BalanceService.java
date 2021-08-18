@@ -4,6 +4,7 @@ import com.example.SimbirSoft_2021_2_microservice.Dto.BalanceDto;
 import com.example.SimbirSoft_2021_2_microservice.Dto.UserDto;
 import com.example.SimbirSoft_2021_2_microservice.entity.BalanceEntity;
 import com.example.SimbirSoft_2021_2_microservice.entity.UserEntity;
+import com.example.SimbirSoft_2021_2_microservice.exception.BalanceExistsException;
 import com.example.SimbirSoft_2021_2_microservice.exception.UserExistsException;
 import com.example.SimbirSoft_2021_2_microservice.mappers.BalanceMapper;
 import com.example.SimbirSoft_2021_2_microservice.mappers.UserMapper;
