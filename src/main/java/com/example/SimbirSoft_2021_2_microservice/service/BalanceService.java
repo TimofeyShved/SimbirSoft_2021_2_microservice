@@ -88,9 +88,17 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return userModel;
     }
 
+    @Transactional
     @Override
-    public <S> S deleteOne(Long id) throws Exception {
-        return null;
+    public Long deleteOne(Long id) throws BalanceNotFoundException {
+
+        //  проверка на то что человек вообще существуют
+        if (balanceCrud.findByBalanceId(id)==null){
+            throw new BalanceNotFoundException();
+        }
+
+        balanceCrud.deleteById(id);
+        return id;
     }
 
     @Override
