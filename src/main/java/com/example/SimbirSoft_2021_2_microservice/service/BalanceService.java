@@ -73,9 +73,19 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return userModelList;
     }
 
+
+    @Transactional
     @Override
-    public <S> S getOne(Long id) throws Exception {
-        return null;
+    public BalanceModel getOne(Long id) throws BalanceNotFoundException {
+        BalanceEntity balanceEntity = balanceCrud.findByBalanceId(id);
+
+        //  проверка на то что вообще существуют
+        if (balanceEntity==null){
+            throw new BalanceNotFoundException();
+        }
+
+        BalanceModel userModel = new BalanceModel(BalanceMapper.INSTANCE.toDto(balanceEntity));
+        return userModel;
     }
 
     @Override
