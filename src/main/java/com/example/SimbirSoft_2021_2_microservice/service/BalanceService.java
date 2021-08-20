@@ -48,7 +48,8 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         BalanceEntity balanceEntity = BalanceMapper.INSTANCE.toEntity(balanceDto);
 
         //  проверка
-        if ((balanceCrud.findByBalanceId(balanceEntity.getBalanceId())!=null)){ // проверить, что есть такая реализация существует
+        if ((balanceCrud.findByBalanceId(balanceEntity.getBalanceId())!=null) ||
+                (balanceCrud.findByUserId(balanceEntity.getUserId())!=null)){ // проверить, что есть такая реализация существует
             throw new BalanceExistsException();
         }
 
@@ -92,7 +93,7 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
     @Override
     public Long deleteOne(Long id) throws BalanceNotFoundException {
 
-        //  проверка на то что человек вообще существуют
+        //  проверка на то что вообще существуют
         if (balanceCrud.findByBalanceId(id)==null){
             throw new BalanceNotFoundException();
         }
@@ -101,8 +102,29 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return id;
     }
 
+    @Transactional
     @Override
-    public BalanceDto updateOne(Long id, BalanceDto o) throws Exception {
-        return null;
+    public BalanceDto updateOne(Long id, BalanceDto balanceDto) throws BalanceNotFoundException, BalanceExistsException {
+
+        //  проверка на то что человек вообще существуют
+        if (balanceCrud.findByBalanceId(id)==null){
+            throw new BalanceNotFoundException();
+        }
+        BalanceEntity balanceEntityNew = BalanceMapper.INSTANCE.toEntity(balanceDto);
+        BalanceEntity balanceEntity = balanceCrud.findByUserId(id);
+
+        //  проверка
+        BalanceEntity balanceEntityTest = balanceCrud.findByBalanceIdAndUserId(id, balanceEntityNew.getUserId());
+        if ((balanceEntityTest!=null)&&(balanceEntityTest!=balanceEntity)){ // проверить, что есть такая реализация существует
+            throw new BalanceExistsException();
+        }
+
+        // присваивание новых значений
+        balanceEntity.setBalance(balanceEntityNew.getBalance());
+        balanceEntity.setUserId(balanceEntityNew.getUserId());
+
+        // сохранение
+        balanceCrud.save(balanceEntity);
+        return BalanceMapper.INSTANCE.toDto(balanceEntity);
     }
 }

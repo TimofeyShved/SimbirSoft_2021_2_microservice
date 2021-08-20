@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface BalanceCrud extends JpaRepository<BalanceEntity, Long> {
     BalanceEntity findByUserId(Long userId);
     BalanceEntity findByBalanceId(Long balanceId);
+    BalanceEntity findByBalanceIdAndUserId(Long balanceId, Long userId);
 }
