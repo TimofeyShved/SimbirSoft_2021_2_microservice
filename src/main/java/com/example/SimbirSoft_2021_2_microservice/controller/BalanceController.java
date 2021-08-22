@@ -77,4 +77,15 @@ public class BalanceController {
             return null;
         }
     }
+
+    @Operation(summary = "Удалить выбранного человека")
+    @RequestMapping(value = "/deletebalance/{balanceId}", method = RequestMethod.DELETE) // удалить
+    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteOne(@Validated @PathVariable Long balanceId) throws Exception {
+        try {
+            return ResponseEntity.ok(balanceService.deleteOne(balanceId));
+        }catch (Exception e){
+            return  ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
