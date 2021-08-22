@@ -33,11 +33,22 @@ public class BalanceController {
     @Operation(summary = "Добавить Баланс")
     @RequestMapping(value = "/posbalance", method = RequestMethod.POST) // создать
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity registration(@Validated @RequestBody BalanceDto balanceDto) throws Exception {
+    public ResponseEntity posbalance(@Validated @RequestBody BalanceDto balanceDto) throws Exception {
         try {
             return ResponseEntity.ok(balanceService.registration(balanceDto));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Получить список балансов")
+    @RequestMapping(value = "/getbalances", method = RequestMethod.GET) // взять
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getbalances(){
+        try {
+            return ResponseEntity.ok(balanceService.getAll());
+        }catch (Exception e){
+            return  ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
