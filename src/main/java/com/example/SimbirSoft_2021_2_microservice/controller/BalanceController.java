@@ -2,6 +2,7 @@ package com.example.SimbirSoft_2021_2_microservice.controller;
 
 import com.example.SimbirSoft_2021_2_microservice.Dto.BalanceDto;
 import com.example.SimbirSoft_2021_2_microservice.Dto.UserDto;
+import com.example.SimbirSoft_2021_2_microservice.model.UserModel;
 import com.example.SimbirSoft_2021_2_microservice.service.BalanceService;
 import com.example.SimbirSoft_2021_2_microservice.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +34,7 @@ public class BalanceController {
     @Operation(summary = "Добавить Баланс")
     @RequestMapping(value = "/posbalance", method = RequestMethod.POST) // создать
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity posbalance(@Validated @RequestBody BalanceDto balanceDto) throws Exception {
+    public ResponseEntity registration(@Validated @RequestBody BalanceDto balanceDto) throws Exception {
         try {
             return ResponseEntity.ok(balanceService.registration(balanceDto));
         } catch (Exception e) {
@@ -44,11 +45,23 @@ public class BalanceController {
     @Operation(summary = "Получить список балансов")
     @RequestMapping(value = "/getbalances", method = RequestMethod.GET) // взять
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getbalances(){
+    public ResponseEntity getAll(){
         try {
             return ResponseEntity.ok(balanceService.getAll());
         }catch (Exception e){
             return  ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Получить баланс выбранного человека")
+    @RequestMapping(value = "/getbalance/{userId}", method = RequestMethod.GET) // взять
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BalanceDto> getOneByUserId(@Validated @PathVariable Long userId) throws Exception {
+        try {
+            return ResponseEntity.ok(balanceService.getOneByUserId(userId));
+        }catch (Exception e){
+            //return  ResponseEntity.badRequest().body(e.getMessage());
+            return null;
         }
     }
 }

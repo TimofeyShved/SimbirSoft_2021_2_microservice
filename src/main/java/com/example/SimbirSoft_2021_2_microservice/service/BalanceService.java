@@ -74,6 +74,10 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return userModelList;
     }
 
+    @Override
+    public BalanceDto getOneByUserId(Long userId) throws BalanceNotFoundException {
+        return null;
+    }
 
     @Transactional
     @Override
