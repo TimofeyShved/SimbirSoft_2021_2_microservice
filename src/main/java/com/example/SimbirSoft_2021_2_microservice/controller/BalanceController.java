@@ -88,4 +88,15 @@ public class BalanceController {
             return  ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @Operation(summary = "Обновить данные выбранного человека")
+    @RequestMapping(value = "/putbalance/{balanceId}", method = RequestMethod.PUT) // обновить
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity updateOne(@Validated @PathVariable Long balanceId, @Validated @RequestBody BalanceDto balanceDto) throws Exception {
+        try {
+            return ResponseEntity.ok(balanceService.updateOne(balanceId, balanceDto));
+        }catch (Exception e){
+            return  ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
