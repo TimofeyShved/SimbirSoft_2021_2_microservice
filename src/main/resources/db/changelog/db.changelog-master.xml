@@ -7,4 +7,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
             http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd">
 
+    <include file="db/changelog/CreateDataBase/db.changelog-CreateUser.yaml" />
+    <include file="db/changelog/CreateDataBase/db.changelog-CreateBalance.yaml" />
+
+    <include file="db/changelog/InsertDataBase/db.changelog-InsertUser.yaml" />
+    <include file="db/changelog/InsertDataBase/db.changelog-InsertBalance.yaml" />
+
+    <include file="db/changelog/UpdateDataBase/db.changelog-UpdateUser.sql" />
+
 </databaseChangeLog>
