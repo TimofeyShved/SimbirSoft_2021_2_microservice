@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/CreateDataBase/db.changelog-CreateBalance.yaml
+  - changeSet:
+      id: 4
+      author: your_liquibase_username
+      changes:
+        - createTable:
+            tableName: balance_entity
+            columns:
+              - column:
+                  name: balance_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: balance
+                  type: INT
+              - column:
+                  name: user_id
+                  type: INT
