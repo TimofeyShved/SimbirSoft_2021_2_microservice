@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/InsertDataBase/db.changelog-InsertBalance.yaml
+  - changeSet:
+      id: 5
+      author: your_liquibase_username
+      comment: "Create admin user"
+      changes:
+        - insert:
+            tableName: balance_entity
+            columns:
+              - column:
+                  name: balance
+                  value: 1000
+              - column:
+                  name: user_id
+                  value: 1
+        - insert:
+            tableName: balance_entity
+            columns:
+              - column:
+                  name: balance
+                  value: 2500
+              - column:
+                  name: user_id
+                  value: 2
+        - insert:
+            tableName: balance_entity
+            columns:
+              - column:
+                  name: balance
+                  value: 500
+              - column:
+                  name: user_id
+                  value: 3
+        - insert:
+            tableName: balance_entity
+            columns:
+              - column:
+                  name: balance
+                  value: 7900
+              - column:
+                  name: user_id
+                  value: 4
+        - insert:
+            tableName: balance_entity
+            columns:
+              - column:
+                  name: balance
+                  value: 3200
+              - column:
+                  name: user_id
+                  value: 5
