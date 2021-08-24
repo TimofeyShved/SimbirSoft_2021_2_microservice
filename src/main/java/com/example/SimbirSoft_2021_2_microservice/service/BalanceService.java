@@ -115,6 +115,16 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
 
     @Transactional
     @Override
+    public Long deleteOneByUserId(Long userId) {
+        BalanceEntity balanceEntity = balanceCrud.findByUserId(userId);
+        if (balanceEntity!=null){
+            balanceCrud.delete(balanceEntity);
+        }
+        return userId;
+    }
+
+    @Transactional
+    @Override
     public BalanceDto updateOne(Long id, BalanceDto balanceDto) throws BalanceNotFoundException, BalanceExistsException {
 
         //  проверка на то что человек вообще существуют

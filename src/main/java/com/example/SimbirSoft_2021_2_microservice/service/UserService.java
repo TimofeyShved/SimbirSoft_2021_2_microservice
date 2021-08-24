@@ -49,10 +49,12 @@ public class UserService implements StandartServiceInterface<UserDto>, UserServi
     //private ProjectCrud projectCRUD;
 
     private final UserCrud userCrud; // создаём интерфейс для взаимодействия с бд
+    private final BalanceService balanceService;
 
     // 3 способ
-    public UserService(UserCrud userCrud) {
+    public UserService(UserCrud userCrud, BalanceService balanceService) {
         this.userCrud = userCrud;
+        this.balanceService = balanceService;
     }
 
     /**
@@ -147,6 +149,7 @@ public class UserService implements StandartServiceInterface<UserDto>, UserServi
             throw new UserNotFoundException();
         }
 
+        balanceService.deleteOneByUserId(id);
         userCrud.deleteById(id);
         return id;
     }

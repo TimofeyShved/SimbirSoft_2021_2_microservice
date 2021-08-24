@@ -6,4 +6,5 @@ import com.example.SimbirSoft_2021_2_microservice.exception.UserNotFoundExceptio
 
 public interface BalanceServiceInterface {
     BalanceDto getOneByUserId(Long userId) throws Exception;
+    Long deleteOneByUserId(Long userId);
 }
