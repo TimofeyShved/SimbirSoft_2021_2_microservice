@@ -1,6 +1,7 @@
 package com.example.SimbirSoft_2021_2_microservice.controller;
 
 import com.example.SimbirSoft_2021_2_microservice.Dto.BalanceDto;
+import com.example.SimbirSoft_2021_2_microservice.Dto.BuyDto;
 import com.example.SimbirSoft_2021_2_microservice.service.BuyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
