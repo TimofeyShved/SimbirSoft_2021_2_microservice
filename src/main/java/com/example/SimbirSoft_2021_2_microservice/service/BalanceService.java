@@ -1,28 +1,44 @@
 package com.example.SimbirSoft_2021_2_microservice.service;
 
 import com.example.SimbirSoft_2021_2_microservice.Dto.BalanceDto;
-import com.example.SimbirSoft_2021_2_microservice.Dto.UserDto;
 import com.example.SimbirSoft_2021_2_microservice.entity.BalanceEntity;
-import com.example.SimbirSoft_2021_2_microservice.entity.UserEntity;
 import com.example.SimbirSoft_2021_2_microservice.exception.BalanceExistsException;
 import com.example.SimbirSoft_2021_2_microservice.exception.BalanceNotFoundException;
 import com.example.SimbirSoft_2021_2_microservice.exception.UserExistsException;
 import com.example.SimbirSoft_2021_2_microservice.exception.UserNotFoundException;
 import com.example.SimbirSoft_2021_2_microservice.mappers.BalanceMapper;
-import com.example.SimbirSoft_2021_2_microservice.mappers.UserMapper;
 import com.example.SimbirSoft_2021_2_microservice.model.BalanceModel;
-import com.example.SimbirSoft_2021_2_microservice.model.UserModel;
 import com.example.SimbirSoft_2021_2_microservice.repository.BalanceCrud;
-import com.example.SimbirSoft_2021_2_microservice.repository.UserCrud;
 import com.example.SimbirSoft_2021_2_microservice.service.interfaceService.BalanceServiceInterface;
 import com.example.SimbirSoft_2021_2_microservice.service.interfaceService.StandartServiceInterface;
-import com.example.SimbirSoft_2021_2_microservice.service.interfaceService.UserServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+
+/**
+ * <h1> Сервис баланса - (BalanceService) </h1>
+ * Данный класс реализует запросы, которые
+ * приходят в контроллер баланса (BalanceController),
+ * результат он возвращаяет обратно.
+ * <p>
+ * <b>Примечание:</b>
+ * В данном классе можно конструтор, организовать 3
+ * разными способами.
+ * А так же он использует свой интерфейс.
+ * И стандартный для этого проекта, а это:
+ * регистрация (registration),
+ * вытащить всё (getAll),
+ * вытащить одно (getOne),
+ * удалить одно (deleteOne),
+ * обновить одно (updateOne).
+ *
+ * @автор  Швед Т.Ю.
+ * @версия 0.4
+ * @от   2021-08-13
+ */
 
 // 1 способ
 //@RequiredArgsConstructor
@@ -42,6 +58,14 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         this.balanceCrud = balanceCrud;
     }
 
+    /**
+     * Это основной метод регистрации, из стандартного интерфейса
+     * использующий метод registration.
+     * Основная задача которой сохранить нового пользователя в бд.
+     * @param balanceDto Это первый и единственный параметр метода registration, который обозначает баланс пользователя.
+     * @return BalanceDto Вернёт Баланс.
+     * @exception BalanceExistsException При ошибке если такая реализация существует.
+     */
     @Transactional
     @Override
     public BalanceDto registration(BalanceDto balanceDto) throws BalanceExistsException {
@@ -58,6 +82,14 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return BalanceMapper.INSTANCE.toDto(balanceEntity);
     }
 
+    /**
+     * Это основной метод вытащить всё, из стандартного интерфейса
+     * использующий метод getAll.
+     * Основная задача которой вытащить баланс, всех людей из бд.
+     * @param () Не используется.
+     * @return List<BalanceModel> Вернёт список баланса всех людей.
+     * @exception BalanceNotFoundException При ошибке если баланса вообще не существуют.
+     */
     @Transactional
     @Override
     public List<BalanceModel> getAll() throws BalanceNotFoundException {
@@ -74,6 +106,14 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return userModelList;
     }
 
+    /**
+     * Это дополнительный метод, что-бы вытащить баланс одного человека, из стандартного интерфейса
+     * использующий метод getOneByUserId.
+     * Основная задача которой вытащить баланс одного человека по его id из бд.
+     * @param id Это первый и единственный параметр метода getOneByUserId, который обозначает номер пользователя в бд.
+     * @return BalanceDto Вернёт баланс пользователя.
+     * @exception BalanceNotFoundException При ошибке если баланса вообще не существуют.
+     */
     @Override
     public BalanceDto getOneByUserId(Long id) throws BalanceNotFoundException {
         BalanceEntity balanceEntity = balanceCrud.findByUserId(id);
@@ -86,6 +126,14 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return BalanceMapper.INSTANCE.toDto(balanceEntity);
     }
 
+    /**
+     * Это основной метод, что-бы вытащить баланс одного человека, из стандартного интерфейса
+     * использующий метод getOne.
+     * Основная задача которой вытащить баланс одного человека из бд.
+     * @param id Это первый и единственный параметр метода getOne, который обозначает номер баланса пользователя в бд.
+     * @return BalanceModel Вернёт баланс пользователя.
+     * @exception BalanceNotFoundException При ошибке если баланс вообще не существуют.
+     */
     @Transactional
     @Override
     public BalanceModel getOne(Long id) throws BalanceNotFoundException {
@@ -100,6 +148,14 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return userModel;
     }
 
+    /**
+     * Это основной метод, что-бы удалить баланс одного человека, из стандартного интерфейса
+     * использующий метод deleteOne.
+     * Основная задача которой удалить одного человека из бд.
+     * @param id Это первый и единственный параметр метода deleteOne, который обозначает номер баланса пользователя в бд.
+     * @return Long Вернёт номер баланса пользователя в бд.
+     * @exception BalanceNotFoundException При ошибке если баланс вообще не существуют.
+     */
     @Transactional
     @Override
     public Long deleteOne(Long id) throws BalanceNotFoundException {
@@ -113,6 +169,13 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return id;
     }
 
+    /**
+     * Это дополнительный метод удалить баланс одного человека, из стандартного интерфейса
+     * использующий метод deleteOneByUserId.
+     * Основная задача которой удалить баланс одного человека по его id из бд.
+     * @param userId Это первый и единственный параметр метода deleteOneByUserId, который обозначает номер пользователя в бд.
+     * @return Long Вернёт номер пользователя в бд.
+     */
     @Transactional
     @Override
     public Long deleteOneByUserId(Long userId) {
@@ -123,6 +186,16 @@ public class BalanceService implements StandartServiceInterface<BalanceDto>, Bal
         return userId;
     }
 
+    /**
+     * Это основной метод, что-бы обновить баланс одного человека, из стандартного интерфейса
+     * использующий метод updateOne.
+     * Основная задача которой обновить баланс одного человека в бд.
+     * @param id Это первый параметр метода updateOne, который обозначает номер баланса пользователя в бд.
+     * @param balanceDto Это второй параметр метода updateOne, который обозначает данные баланса пользователя.
+     * @return BalanceDto Вернёт баланс пользователя.
+     * @exception BalanceNotFoundException При ошибке если люди вообще не существуют.
+     * @exception BalanceExistsException При ошибке если такая реализация существует.
+     */
     @Transactional
     @Override
     public BalanceDto updateOne(Long id, BalanceDto balanceDto) throws BalanceNotFoundException, BalanceExistsException {
