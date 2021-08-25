@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset liquibase-demo-service:3
+--changeset liquibase-demo-service:5
 
 ALTER TABLE user_entity ADD email varchar(255);
 

@@ -21,7 +21,6 @@ public class BuyController {
     // 2 способ
     //@Autowired
     //private BalanceService balanceService;
-
     private final BuyService buyService;
 
     // 3 способ
@@ -33,6 +32,8 @@ public class BuyController {
     @RequestMapping(value = "/project", method = RequestMethod.POST) // создать
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity buyProject (@Validated @RequestBody BuyDto buyDto) throws Exception {
+        System.out.println("------------------0-------------------");
+        System.out.println(buyDto.getEmail());
         try {
             return ResponseEntity.ok(buyService.buyProject(buyDto));
         } catch (Exception e) {

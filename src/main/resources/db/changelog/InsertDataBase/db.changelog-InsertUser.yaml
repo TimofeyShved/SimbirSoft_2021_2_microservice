@@ -1,7 +1,7 @@
 databaseChangeLog:
   - logicalFilePath: db/changelog/InsertDataBase/db.changelog-InsertUser.yaml
   - changeSet:
-      id: 2
+      id: 3
       author: your_liquibase_username
       comment: "Create admin user"
       changes:

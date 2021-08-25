@@ -1,7 +1,7 @@
 databaseChangeLog:
   - logicalFilePath: db/changelog/CreateDataBase/db.changelog-CreateBalance.yaml
   - changeSet:
-      id: 4
+      id: 2
       author: your_liquibase_username
       changes:
         - createTable:
