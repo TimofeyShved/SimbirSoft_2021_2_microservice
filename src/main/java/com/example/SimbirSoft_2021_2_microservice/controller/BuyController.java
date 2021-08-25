@@ -30,7 +30,7 @@ public class BuyController {
     }
 
     @Operation(summary = "Купить проект")
-    @RequestMapping(value = "/postbuy/project", method = RequestMethod.POST) // создать
+    @RequestMapping(value = "/project", method = RequestMethod.POST) // создать
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity buyProject (@Validated @RequestBody BuyDto buyDto) throws Exception {
         try {
